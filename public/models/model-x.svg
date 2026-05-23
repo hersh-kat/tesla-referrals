@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Tesla Model X">
+  <defs>
+    <linearGradient id="bgX" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1d22"/>
+      <stop offset="100%" stop-color="#0a0c0f"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgX)"/>
+  <g transform="translate(110 200)" fill="#f4f4f4">
+    <path d="M40 100 Q60 55 145 48 L320 40 Q400 33 445 65 L495 95 L530 100 Q565 100 575 115 L575 145 L18 145 Q3 145 3 130 Q3 108 40 100 Z"/>
+    <path d="M150 48 L150 12 Q260 -8 360 12 L360 48 Z" fill="#f4f4f4" opacity="0.85"/>
+    <circle cx="150" cy="150" r="32" fill="#f4f4f4"/>
+    <circle cx="150" cy="150" r="16" fill="#1a1d22"/>
+    <circle cx="450" cy="150" r="32" fill="#f4f4f4"/>
+    <circle cx="450" cy="150" r="16" fill="#1a1d22"/>
+  </g>
+  <text x="400" y="380" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="36" font-weight="600" fill="#f4f4f4">Model X</text>
+</svg>

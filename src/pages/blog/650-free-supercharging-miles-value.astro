@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BlogPost from '../../components/BlogPost.astro';
+import { countries, getReferralUrl } from '../../data/countries';
+import { posts } from '../../data/posts';
+
+const country = countries.find((c) => c.slug === 'uk')!;
+const referralUrl = getReferralUrl(country);
+const post = posts.find((p) => p.slug === '650-free-supercharging-miles-value')!;
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  description: post.description,
+  datePublished: post.date,
+  author: { '@type': 'Person', name: 'UK Tesla Model 3 owner' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Tesla Referral Code UK',
+    url: 'https://teslareferralcode.co/',
+  },
+  mainEntityOfPage: `https://teslareferralcode.co/blog/${post.slug}/`,
+};
+---
+<Layout
+  title={`${post.title} | Tesla Referral Code UK`}
+  description={post.description}
+  country={country}
+  canonical={`https://teslareferralcode.co/blog/${post.slug}/`}
+  jsonLd={articleJsonLd}
+>
+  <BlogPost title={post.title} date={post.date} readTime={post.readTime}>
+    <p>
+      650 free Supercharging miles is the headline Tesla referral perk in the
+      UK for Model 3 and Model Y buyers. It sounds nice and round, but what is
+      it actually worth? Below is the maths, the real-world driving range it
+      covers, and a couple of ways to get more out of the credit.
+    </p>
+
+    <h2>The cash value: roughly £120</h2>
+    <p>
+      Tesla Supercharger pricing in the UK varies by site and by time of day,
+      but a reasonable average in 2026 is around 45 to 50 pence per kWh at
+      off-peak rates, and 65 to 70 pence per kWh at peak. A typical Tesla
+      consumes about 25 kWh per 100 miles in mixed driving. That works out to
+      between 11 and 18 pence per mile of charging cost.
+    </p>
+    <p>
+      650 miles of charging credit therefore lands somewhere between £70 (off
+      peak) and £115 (peak). In practice most people charge at a mix of times
+      and prices, so the credit is worth around £100 to £120 in real money. Not
+      life-changing, but enough to cover several long trips.
+    </p>
+
+    <h2>What 650 miles of charging actually covers</h2>
+    <p>
+      650 miles of free charging is not the same as 650 miles of free driving.
+      You will only use a Supercharger when you cannot charge at home, which is
+      mostly on road trips. Here is what the credit covers in real journeys:
+    </p>
+    <ul>
+      <li><strong>London to Edinburgh and back</strong> (around 820 miles round trip). One full Supercharger stop each way, around 200 miles of credit used.</li>
+      <li><strong>London to the Lake District for a long weekend.</strong> One charge there, one back. Around 150 miles used.</li>
+      <li><strong>Manchester to Cornwall return.</strong> Two or three charges total, around 250 miles.</li>
+    </ul>
+    <p>
+      In other words, 650 miles is enough for two or three big UK road trips
+      before you need to start paying. For drivers who mostly charge at home,
+      that can easily cover the first full year of long-distance driving.
+    </p>
+
+    <h2>Tip: combine with off-peak home charging</h2>
+    <p>
+      The cheapest way to run a Tesla in the UK is to charge at home overnight
+      on a smart EV tariff. Octopus Go, Intelligent Octopus, and similar
+      tariffs offer rates around 7 to 8 pence per kWh between roughly midnight
+      and 5am. At that rate, a full Tesla charge costs about £4 to £5 for 250
+      miles of driving.
+    </p>
+    <p>
+      Save the free Supercharging credit for genuine long trips where you need
+      to top up away from home. Do not burn it on a Supercharger session two
+      miles from your house just because it is technically free.
+    </p>
+
+    <h2>How to track your credit</h2>
+    <p>
+      Once you take delivery of your Tesla, the Supercharging credit appears in
+      the Tesla app under the Charging tab. It shows up as a balance in miles,
+      and Tesla deducts from it automatically every time you Supercharge until
+      it is used up. You will get an email when the balance is running low.
+    </p>
+
+    <h2>Do the miles expire?</h2>
+    <p>
+      Tesla has not published an expiry date for referral Supercharging miles
+      in the UK. Owners who received credit in 2021 still report having the
+      balance on their account. That said, Tesla can change the rules at any
+      time, so do not stockpile the credit indefinitely.
+    </p>
+
+    <h2>Is the perk actually worth using a referral code for?</h2>
+    <p>
+      Compared to the price of the car, £100 to £120 of charging credit is a
+      small percentage. But the price you pay is identical whether you use a
+      referral code or not, so there is no reason to skip it. It is genuinely
+      free money for new buyers. The only mistake is forgetting to apply the
+      code before you place the order.
+    </p>
+
+    <p>
+      <a href={referralUrl} rel="nofollow" class="inline-block mt-2">
+        <span class="btn-primary">Use the referral link</span>
+      </a>
+    </p>
+
+    <h2>Read next</h2>
+    <ul>
+      <li><a href="/blog/how-tesla-referral-programme-works-uk/">How the Tesla referral programme works in the UK</a></li>
+      <li><a href="/blog/tesla-referral-code-at-tesla-store/">How to use a Tesla referral code at a Tesla store</a></li>
+      <li><a href="/">Back to the main page and FAQ</a></li>
+    </ul>
+  </BlogPost>
+</Layout>

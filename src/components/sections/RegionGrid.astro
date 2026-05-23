@@ -1,0 +1,49 @@
+---
+import { countries } from '../../data/countries';
+
+const regions = [
+  { key: 'europe', label: 'Europe' },
+  { key: 'north-america', label: 'North America' },
+  { key: 'asia-pacific', label: 'Asia / Pacific' },
+  { key: 'middle-east', label: 'Middle East' },
+] as const;
+---
+<section class="bg-tesla-bg">
+  <div class="container-narrow py-16 sm:py-20">
+    <h2 class="text-2xl sm:text-3xl font-medium text-center mb-2">
+      Other countries
+    </h2>
+    <p class="text-center text-tesla-grey mb-10">
+      The same referral works internationally. Pick your country to see local perks.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {regions.map((r) => {
+        const inRegion = countries.filter((c) => c.region === r.key);
+        if (inRegion.length === 0) return null;
+        return (
+          <div>
+            <h3 class="text-sm font-semibold uppercase tracking-wide text-tesla-grey mb-3">
+              {r.label}
+            </h3>
+            <ul class="space-y-2">
+              {inRegion.map((c) => (
+                <li>
+                  <a
+                    href={c.slug === 'uk' ? '/' : `/${c.slug}/`}
+                    class="flex items-center gap-2 text-sm hover:text-tesla-grey"
+                  >
+                    <span aria-hidden="true">{c.flag}</span>
+                    <span>{c.name}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+    <p class="text-center text-xs text-tesla-grey mt-10">
+      More countries coming soon.
+    </p>
+  </div>
+</section>

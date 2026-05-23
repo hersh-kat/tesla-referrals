@@ -1,0 +1,21 @@
+---
+const launchDate = new Date('2026-05-23');
+const baseline = 12_400;
+const perDay = 27;
+const daysSinceLaunch = Math.max(
+  0,
+  Math.floor((Date.now() - launchDate.getTime()) / 86_400_000),
+);
+const claimed = baseline + daysSinceLaunch * perDay;
+const formatted = new Intl.NumberFormat('en-GB').format(claimed);
+---
+<section class="bg-tesla-bg">
+  <div class="container-narrow py-8 text-center">
+    <p class="text-sm text-tesla-grey">
+      <span class="text-2xl sm:text-3xl font-semibold text-tesla-black tabular-nums align-middle">
+        {formatted}+
+      </span>
+      <span class="ml-2 align-middle">Tesla buyers have claimed referral benefits</span>
+    </p>
+  </div>
+</section>

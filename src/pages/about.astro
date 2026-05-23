@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { countries, getReferralUrl } from '../data/countries';
+
+const country = countries.find((c) => c.slug === 'uk')!;
+const referralUrl = getReferralUrl(country);
+
+const title = `About | Tesla Referral Code UK`;
+const description = `I run this page so people ordering a new Tesla in the UK can use my referral code and claim 650 free Supercharging miles or £500 off. Here's who I am and what I drive.`;
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Tesla Model 3 owner, UK',
+  url: 'https://teslareferralcode.co/about/',
+  owns: {
+    '@type': 'Vehicle',
+    name: 'Tesla Model 3 Standard RWD',
+    modelDate: '2026',
+    brand: { '@type': 'Brand', name: 'Tesla' },
+  },
+};
+---
+<Layout
+  title={title}
+  description={description}
+  country={country}
+  canonical="https://teslareferralcode.co/about/"
+  jsonLd={personJsonLd}
+>
+  <section class="bg-white">
+    <div class="container-narrow py-16 sm:py-20 max-w-3xl">
+      <p class="text-xs uppercase tracking-widest text-tesla-grey mb-4">
+        About this site
+      </p>
+      <h1 class="text-3xl sm:text-5xl font-medium leading-tight">
+        I drive a 2026 Model 3 Standard RWD. This is my referral code.
+      </h1>
+
+      <div class="mt-10 space-y-6 text-base leading-relaxed">
+        <p>
+          Hi, I'm a UK Tesla owner. I picked up a Model 3 Standard RWD earlier
+          this year and I run this page so other UK buyers can use my referral
+          link when they place an order. You get the referral benefit (650 free
+          Supercharging miles or £500 off, depending on the model). I get the
+          same on my side. Tesla pays both ends, the price you pay does not
+          change.
+        </p>
+
+        <h2 class="text-xl font-medium pt-6">The Model 3 Standard RWD, briefly</h2>
+        <p>
+          The Standard RWD is currently the cheapest new Tesla on sale in the
+          UK. It is the entry trim of the refreshed Model 3 line, single motor,
+          rear-wheel drive, around 318 miles of WLTP range. Compared to the
+          Long Range or Performance trims you give up some range and some
+          acceleration, but in day-to-day driving in the UK it is genuinely
+          all the car most people need.
+        </p>
+
+        <h2 class="text-xl font-medium pt-6">Insurance is much cheaper than the older Model 3</h2>
+        <p>
+          The thing that surprised me most was insurance. The 2026 Model 3
+          Standard RWD sits in UK insurance group 32. The previous generation
+          Model 3 sat in the high 40s, which made it noticeably expensive to
+          insure for a lot of drivers. Group 32 is much closer to what you
+          would pay on a BMW 3 Series or a mid-spec Audi A4. If you have been
+          put off Tesla in the past because of insurance quotes, get a fresh
+          quote on the new Standard RWD before you write the brand off.
+        </p>
+
+        <h2 class="text-xl font-medium pt-6">Why I built this page</h2>
+        <p>
+          Tesla's official referral page is hard to find unless you already know
+          someone with a code. I made this so people Googling "Tesla referral
+          code UK" can find a working link and read a plain-English explanation
+          of how the programme actually works. There's a full FAQ on the
+          <a href="/" class="underline hover:text-tesla-red">main page</a>,
+          and the same code works for ordering in person at a Tesla store too.
+        </p>
+
+        <h2 class="text-xl font-medium pt-6">Use the referral</h2>
+        <p>
+          If you're about to order a new Model 3, Model Y, Model S or Model X
+          in the UK, click the button below. It opens tesla.com with the
+          referral code already attached. Order as normal and Tesla applies
+          the benefit automatically.
+        </p>
+
+        <div class="pt-4">
+          <a href={referralUrl} rel="nofollow" class="btn-primary" data-cta="about">
+            Use the referral link
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

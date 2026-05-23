@@ -1,0 +1,37 @@
+---
+import { getReferralUrl, type Country } from '../../data/countries';
+
+interface Props {
+  country: Country;
+}
+
+const { country } = Astro.props;
+const { miles, cashOff, cashSymbol } = country.perks;
+const referralUrl = getReferralUrl(country);
+---
+<section class="bg-white">
+  <div class="container-narrow pt-16 pb-12 sm:pt-24 sm:pb-20 text-center">
+    <p class="text-xs uppercase tracking-widest text-tesla-grey mb-4">
+      Tesla Referral Code · {country.name}
+    </p>
+    <h1 class="text-4xl sm:text-6xl font-medium text-tesla-black leading-tight">
+      {cashSymbol}{cashOff} off your new Tesla
+      <span class="block text-tesla-grey font-light">or {miles} free Supercharging miles</span>
+    </h1>
+    <p class="mt-6 text-base sm:text-lg text-tesla-grey max-w-2xl mx-auto">
+      Use this verified Tesla referral link when ordering a new Model 3, Model Y,
+      Model S or Model X and the referral benefit is applied automatically at checkout.
+    </p>
+    <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+      <a
+        href={referralUrl}
+        rel="nofollow"
+        class="btn-primary text-base"
+        data-cta="hero-primary"
+      >
+        Use referral link
+      </a>
+      <a href="#how" class="btn-secondary text-base">How it works</a>
+    </div>
+  </div>
+</section>

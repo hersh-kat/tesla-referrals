@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import TrustCounter from '../components/sections/TrustCounter.astro';
+import ModelCards from '../components/sections/ModelCards.astro';
+import HowItWorks from '../components/sections/HowItWorks.astro';
+import WhyReferral from '../components/sections/WhyReferral.astro';
+import Videos from '../components/sections/Videos.astro';
+import Faq from '../components/sections/Faq.astro';
+import RegionGrid from '../components/sections/RegionGrid.astro';
+import { countries, getReferralUrl } from '../data/countries';
+
+const country = countries.find((c) => c.slug === 'uk')!;
+const referralUrl = getReferralUrl(country);
+
+const title = `Tesla Referral Code UK 2026 | 650 Free Miles or £500 Off`;
+const description = `Use this verified Tesla referral code (${country.referralCode}) when ordering a new Tesla in the UK to claim 650 free Supercharging miles on Model 3 / Model Y or £500 off Model S / Model X.`;
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Tesla Referral Code',
+  url: 'https://teslareferralcode.co/',
+};
+
+const offerJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Offer',
+  name: 'Tesla Referral Benefit, United Kingdom',
+  description: '650 free Supercharging miles on new Model 3 / Model Y orders, or £500 off new Model S / Model X orders.',
+  url: referralUrl,
+  seller: { '@type': 'Organization', name: 'Tesla' },
+  areaServed: { '@type': 'Country', name: 'United Kingdom' },
+  eligibleCustomerType: 'http://purl.org/goodrelations/v1#Consumer',
+};
+---
+<Layout
+  title={title}
+  description={description}
+  country={country}
+  jsonLd={[websiteJsonLd, offerJsonLd]}
+>
+  <Hero country={country} />
+  <TrustCounter />
+  <ModelCards country={country} />
+  <HowItWorks country={country} />
+  <WhyReferral country={country} />
+  <Videos />
+  <Faq country={country} />
+  <RegionGrid />
+</Layout>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://teslareferralcode.co/sitemap-index.xml

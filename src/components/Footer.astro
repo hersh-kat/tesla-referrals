@@ -1,0 +1,42 @@
+---
+import TeslaLogo from './TeslaLogo.astro';
+
+const year = new Date().getFullYear();
+---
+<footer class="mt-24 border-t border-black/10 bg-tesla-bg">
+  <div class="container-narrow py-12 text-sm text-tesla-grey space-y-6">
+    <div class="flex items-center text-tesla-black">
+      <TeslaLogo class="h-3 w-auto" />
+    </div>
+
+    <p class="text-xs leading-relaxed">
+      <strong class="text-tesla-black">Affiliate disclosure:</strong> When you order
+      a Tesla through the referral link on this page, the owner of this site receives
+      Tesla referral benefits at no additional cost to you. You also receive the
+      referral benefits advertised. This is how this site is funded.
+    </p>
+
+    <p class="text-xs leading-relaxed">
+      <strong class="text-tesla-black">Disclaimer:</strong> This page is not
+      affiliated, associated, endorsed by, or in any way officially connected with
+      Tesla Motors, Inc. or any of its subsidiaries or affiliates. The Tesla name,
+      Tesla logo, and vehicle designs are trademarks of Tesla Motors, Inc.
+      Referral perks and terms are set by Tesla and are subject to change at any
+      time. Please verify current offers on
+      <a href="https://www.tesla.com" class="underline hover:text-tesla-black" rel="nofollow">tesla.com</a>.
+    </p>
+
+    <div class="flex flex-wrap gap-x-6 gap-y-2 pt-4 border-t border-black/10 text-xs">
+      <a href="/about/" class="hover:text-tesla-black">About</a>
+      <a href="/blog/" class="hover:text-tesla-black">Blog</a>
+      <a href="/privacy/" class="hover:text-tesla-black">Privacy</a>
+      <a
+        href="https://www.tesla.com/en_gb/legal/additional-resources#referral-program"
+        class="hover:text-tesla-black"
+        rel="nofollow noopener"
+        target="_blank"
+      >Referral programme terms</a>
+      <span class="ml-auto">© {year} teslareferralcode.co</span>
+    </div>
+  </div>
+</footer>

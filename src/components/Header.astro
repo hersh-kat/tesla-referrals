@@ -1,0 +1,24 @@
+---
+import TeslaLogo from './TeslaLogo.astro';
+import CountrySelector from './CountrySelector.astro';
+import type { Country } from '../data/countries';
+
+interface Props {
+  country: Country;
+}
+
+const { country } = Astro.props;
+---
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-black/5">
+  <div class="container-narrow flex items-center justify-between h-14">
+    <a href="/" class="flex items-center text-tesla-black" aria-label="Home">
+      <TeslaLogo class="h-3 w-auto" />
+    </a>
+    <nav class="flex items-center gap-6">
+      <a href="#models" class="hidden md:inline text-sm hover:text-tesla-grey">Models</a>
+      <a href="#how" class="hidden md:inline text-sm hover:text-tesla-grey">How it works</a>
+      <a href="#faq" class="hidden md:inline text-sm hover:text-tesla-grey">FAQ</a>
+      <CountrySelector current={country} />
+    </nav>
+  </div>
+</header>

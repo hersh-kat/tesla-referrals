@@ -1,0 +1,143 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BlogPost from '../../components/BlogPost.astro';
+import { countries, getReferralUrl } from '../../data/countries';
+import { posts } from '../../data/posts';
+
+const country = countries.find((c) => c.slug === 'uk')!;
+const referralUrl = getReferralUrl(country);
+const post = posts.find((p) => p.slug === 'how-tesla-referral-programme-works-uk')!;
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  description: post.description,
+  datePublished: post.date,
+  author: { '@type': 'Person', name: 'UK Tesla Model 3 owner' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Tesla Referral Code UK',
+    url: 'https://teslareferralcode.co/',
+  },
+  mainEntityOfPage: `https://teslareferralcode.co/blog/${post.slug}/`,
+};
+---
+<Layout
+  title={`${post.title} | Tesla Referral Code UK`}
+  description={post.description}
+  country={country}
+  canonical={`https://teslareferralcode.co/blog/${post.slug}/`}
+  jsonLd={articleJsonLd}
+>
+  <BlogPost title={post.title} date={post.date} readTime={post.readTime}>
+    <p>
+      Tesla's UK referral programme is the only official way to get a discount or
+      perk on a new Tesla. There are no public discount codes, no seasonal sales
+      and no haggling at the showroom. If you want money off, or free miles, you
+      need a referral code from an existing owner. Here is how the programme
+      actually works in 2026, with the small print most people miss.
+    </p>
+
+    <h2>What you get</h2>
+    <p>
+      The perk depends on which model you order. For new Model 3 and Model Y
+      orders, Tesla credits your account with 650 free Supercharging miles. For
+      new Model S and Model X orders, Tesla deducts £500 from the purchase
+      price at checkout. You can only claim one perk per car, and the perk is
+      tied to the order you place, not to the buyer personally.
+    </p>
+
+    <h3>Why two different perks?</h3>
+    <p>
+      Tesla designs the referral incentive around the margin on each model. Model
+      3 and Model Y are the higher volume cars and they get a "soft" perk in the
+      form of Supercharging credit, which costs Tesla less than handing over cash.
+      Model S and Model X are lower volume premium cars and they get a flat £500
+      off, which is a more meaningful incentive at that price point.
+    </p>
+
+    <h2>Who qualifies</h2>
+    <p>
+      The referral perk only applies to brand new Tesla orders. It does not work
+      on a used Tesla bought through Tesla's own approved-used programme. It also
+      does not apply to leases set up by third party finance companies, and it
+      does not stack with corporate or salary sacrifice discounts in most cases.
+      If you are buying outright, financing through Tesla, or buying personally
+      under PCP, you should be fine.
+    </p>
+
+    <h2>How to apply the code</h2>
+    <p>There are two ways to use a referral code in the UK:</p>
+    <ul>
+      <li>
+        <strong>Order online:</strong> click a referral link (like the one on the
+        <a href="/">main page</a> of this site) before you start configuring your
+        car. The code attaches to your tesla.com session and applies
+        automatically when you confirm the order.
+      </li>
+      <li>
+        <strong>Order in store:</strong> tell the advisor you have a referral
+        code before they submit the order in their system. They will type it in
+        manually. There is a separate <a href="/blog/tesla-referral-code-at-tesla-store/">guide on using a code in store</a>
+        if you would rather order in person.
+      </li>
+    </ul>
+
+    <h2>The single most common mistake</h2>
+    <p>
+      Tesla cannot add a referral code to an order after the order has been
+      submitted. There is no support email, no exception process and no way to
+      retro-fit the perk. If you confirm an order without the code attached, the
+      perk is gone for that purchase. Always check the code is applied before
+      you click confirm.
+    </p>
+
+    <h2>When the perk shows up</h2>
+    <p>
+      For the £500 off, it is deducted in your order summary before you pay any
+      money. You see it as a line item with the referral code shown next to it.
+      For the 650 free Supercharging miles, the credit appears in your Tesla
+      account a few days after you take delivery of the car, under the
+      "Charging" section in the Tesla app.
+    </p>
+
+    <h2>Do the miles expire?</h2>
+    <p>
+      The free Supercharging miles do not expire in any UK literature Tesla has
+      published. People with referrals from years ago still have credit on their
+      accounts. That said, Tesla can change the terms of the programme at any
+      time, so there is no guarantee they will be valid forever. The sensible
+      approach is to use them in your first year of ownership when you are most
+      likely to be relying on Superchargers anyway.
+    </p>
+
+    <h2>What if I forget to apply the code?</h2>
+    <p>
+      You cannot retro-apply it. Tesla's official position is that it is the
+      buyer's responsibility to make sure the code is on the order at the time of
+      purchase. If you are in the showroom right now and have not given a code
+      yet, ask the advisor to hold off submitting the order, pull up a referral
+      link on your phone, and read out the code before they click submit.
+    </p>
+
+    <h2>Ready to use a code?</h2>
+    <p>
+      If you are about to order a new Tesla in the UK, the referral link on this
+      site is ready to use. It opens tesla.com with the code pre-attached.
+    </p>
+
+    <p>
+      <a href={referralUrl} rel="nofollow" class="inline-block mt-2">
+        <span class="btn-primary">Use the referral link</span>
+      </a>
+    </p>
+
+    <h2>Read next</h2>
+    <ul>
+      <li><a href="/blog/650-free-supercharging-miles-value/">What can you do with 650 free Supercharging miles?</a></li>
+      <li><a href="/blog/tesla-referral-code-at-tesla-store/">How to use a Tesla referral code at a Tesla store</a></li>
+      <li><a href="/">Back to the main page and FAQ</a></li>
+    </ul>
+  </BlogPost>
+</Layout>
