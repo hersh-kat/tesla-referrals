@@ -42,10 +42,17 @@ export function getReferralUrl(country: Country): string {
   return `https://www.tesla.com/${country.teslaLocale}/referral/${country.referralCode}`;
 }
 
+const orderSlug = {
+  m3: 'model3',
+  my: 'modely',
+  ms: 'models',
+  mx: 'modelx',
+} as const;
+
 export function getOrderUrl(country: Country, model: 'm3' | 'my' | 'ms' | 'mx'): string {
-  return `https://www.tesla.com/${country.teslaLocale}/${model}/design?referral=${country.referralCode}`;
+  return `https://www.tesla.com/${country.teslaLocale}/${orderSlug[model]}/design?referral=${country.referralCode}&redirect=no`;
 }
 
 export function getInventoryUrl(country: Country, model: 'm3' | 'my' | 'ms' | 'mx'): string {
-  return `https://www.tesla.com/${country.teslaLocale}/inventory/new/${model}?referral=${country.referralCode}`;
+  return `https://www.tesla.com/${country.teslaLocale}/inventory/new/${model}?referral=${country.referralCode}&redirect=no`;
 }

@@ -83,12 +83,7 @@ const half = cards.filter((c) => c.size === 'half');
 
     <div class="space-y-4 sm:space-y-6">
       {wide.map((c) => (
-        <a
-          href={c.orderHref ?? c.inventoryHref}
-          rel="nofollow"
-          class="model-card aspect-[21/9] sm:aspect-[24/9]"
-          data-cta={`card-${c.key}`}
-        >
+        <div class="model-card aspect-[21/9] sm:aspect-[24/9]" data-card={c.key}>
           <img src={c.image} alt={`Tesla ${c.name}`} loading="eager" decoding="async" />
           <div class="model-card-content">
             <header class="model-card-header">
@@ -97,24 +92,33 @@ const half = cards.filter((c) => c.size === 'half');
             </header>
             <div class="model-card-buttons">
               {c.orderHref && (
-                <span class="model-btn model-btn-primary">Order Now</span>
+                <a
+                  href={c.orderHref}
+                  rel="nofollow"
+                  class="model-btn model-btn-primary"
+                  data-cta={`${c.key}-order`}
+                >
+                  Order Now
+                </a>
               )}
               {c.inventoryHref && (
-                <span class="model-btn model-btn-secondary">Explore Inventory</span>
+                <a
+                  href={c.inventoryHref}
+                  rel="nofollow"
+                  class="model-btn model-btn-secondary"
+                  data-cta={`${c.key}-inventory`}
+                >
+                  Explore Inventory
+                </a>
               )}
             </div>
           </div>
-        </a>
+        </div>
       ))}
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {half.map((c) => (
-          <a
-            href={c.orderHref ?? c.inventoryHref}
-            rel="nofollow"
-            class="model-card aspect-[4/3] sm:aspect-[16/10]"
-            data-cta={`card-${c.key}`}
-          >
+          <div class="model-card aspect-[4/3] sm:aspect-[16/10]" data-card={c.key}>
             <img src={c.image} alt={`Tesla ${c.name}`} loading="lazy" decoding="async" />
             <div class="model-card-content">
               <header class="model-card-header">
@@ -123,14 +127,28 @@ const half = cards.filter((c) => c.size === 'half');
               </header>
               <div class="model-card-buttons">
                 {c.orderHref && (
-                  <span class="model-btn model-btn-primary">Order Now</span>
+                  <a
+                    href={c.orderHref}
+                    rel="nofollow"
+                    class="model-btn model-btn-primary"
+                    data-cta={`${c.key}-order`}
+                  >
+                    Order Now
+                  </a>
                 )}
                 {c.inventoryHref && (
-                  <span class="model-btn model-btn-secondary">Explore Inventory</span>
+                  <a
+                    href={c.inventoryHref}
+                    rel="nofollow"
+                    class="model-btn model-btn-secondary"
+                    data-cta={`${c.key}-inventory`}
+                  >
+                    Explore Inventory
+                  </a>
                 )}
               </div>
             </div>
-          </a>
+          </div>
         ))}
       </div>
     </div>
@@ -209,13 +227,14 @@ const half = cards.filter((c) => c.size === 'half');
     font-size: 0.8125rem;
     font-weight: 500;
     border-radius: 4px;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
   }
   .model-btn-primary {
     background: rgba(244, 244, 244, 0.85);
     color: #171a20;
   }
-  .model-card:hover .model-btn-primary {
+  .model-btn-primary:hover {
     background: rgba(244, 244, 244, 1);
   }
   .model-btn-secondary {
@@ -223,7 +242,7 @@ const half = cards.filter((c) => c.size === 'half');
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.8);
   }
-  .model-card:hover .model-btn-secondary {
+  .model-btn-secondary:hover {
     background: rgba(23, 26, 32, 0.85);
   }
 
