@@ -1,4 +1,12 @@
 ---
+import type { PageContent } from '../../data/content';
+
+interface Props {
+  content: PageContent;
+}
+
+const { content } = Astro.props;
+
 const videos = [
   {
     id: 'gQ92igDGBHQ',
@@ -13,7 +21,7 @@ const videos = [
 <section class="bg-tesla-bg">
   <div class="container-narrow py-16 sm:py-20">
     <h2 class="text-2xl sm:text-3xl font-medium text-center mb-10">
-      See the cars
+      {content.videosTitle}
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {videos.map((v) => (

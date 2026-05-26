@@ -1,55 +1,20 @@
 ---
 import { getReferralUrl, type Country } from '../../data/countries';
+import type { PageContent } from '../../data/content';
 
 interface Props {
   country: Country;
+  content: PageContent;
 }
 
-const { country } = Astro.props;
-const { miles, cashOff, cashSymbol } = country.perks;
+const { country, content } = Astro.props;
 const referralUrl = getReferralUrl(country);
-
-export type FaqItem = { q: string; a: string };
-
-const faqs: FaqItem[] = [
-  {
-    q: 'How do I use this Tesla referral code?',
-    a: `Click the "Use referral link" button anywhere on this page. It opens tesla.com with the referral code already attached to your session. Configure and order your Tesla as normal. The benefit is applied automatically when you place the order.`,
-  },
-  {
-    q: `What do I get for using the referral code?`,
-    a: `New Model 3 and Model Y orders receive ${miles} free Supercharging miles. New Model S and Model X orders receive ${cashSymbol}${cashOff} off the purchase price. Benefits are credited at delivery and managed inside your Tesla account.`,
-  },
-  {
-    q: `Does the referral code work on inventory cars and demo vehicles?`,
-    a: `Yes. The referral benefit applies to most new Tesla orders, including in-stock inventory cars. It does not apply to used Tesla purchases or to leases.`,
-  },
-  {
-    q: `Is this referral code official?`,
-    a: `Yes. It's a valid Tesla referral code issued by Tesla to an existing owner. Tesla's referral programme is the only official way to receive a discount or perk on a new Tesla. Tesla itself does not run public discount codes.`,
-  },
-  {
-    q: `When do I need to apply the code?`,
-    a: `Before you confirm your order. Tesla cannot add or change a referral code after the order has been submitted, so make sure you reach tesla.com via the link on this page.`,
-  },
-  {
-    q: `Will I pay more if I use a referral code?`,
-    a: `No. The price you pay is identical to ordering without a referral code. The benefit is on top, at no cost to you.`,
-  },
-  {
-    q: `Can I use a referral code at a Tesla store?`,
-    a: `Yes. If you order in person at a Tesla store, give the referral code "${country.referralCode}" to the advisor before they submit the order. They will attach it to your purchase manually.`,
-  },
-  {
-    q: `Is there a deadline?`,
-    a: `Tesla can adjust the referral programme at any time. The current benefits (${miles} miles or ${cashSymbol}${cashOff} off) are what Tesla is advertising at the time of writing. Always confirm on tesla.com before ordering.`,
-  },
-];
+const faqs = content.faqs;
 ---
 <section id="faq" class="bg-white">
   <div class="container-narrow py-16 sm:py-20 max-w-3xl">
     <h2 class="text-2xl sm:text-3xl font-medium text-center mb-10">
-      Frequently asked questions
+      {content.faqTitle}
     </h2>
     <div class="divide-y divide-black/10 border-t border-b border-black/10">
       {faqs.map((f, i) => (
@@ -72,7 +37,7 @@ const faqs: FaqItem[] = [
     </div>
     <div class="mt-10 text-center">
       <a href={referralUrl} rel="nofollow" class="btn-primary" data-cta="faq">
-        Use referral link
+        {content.ctaUseReferral}
       </a>
     </div>
   </div>

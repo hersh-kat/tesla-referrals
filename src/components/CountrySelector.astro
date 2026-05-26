@@ -1,11 +1,18 @@
 ---
-import { countries, type Country } from '../data/countries';
+import {
+  countriesByRegion,
+  getCountryHref,
+  getLanguageHref,
+  regions,
+  type Country,
+} from '../data/countries';
 
 interface Props {
   current: Country;
 }
 
 const { current } = Astro.props;
+const grouped = countriesByRegion();
 ---
 <div class="relative inline-block text-left" data-country-selector>
   <button
@@ -22,20 +29,57 @@ const { current } = Astro.props;
     </svg>
   </button>
   <div
-    class="hidden absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 z-50"
+    class="hidden absolute right-0 mt-2 w-[22rem] max-w-[calc(100vw-1rem)] origin-top-right rounded-md bg-white shadow-xl ring-1 ring-black/10 z-50"
     data-country-menu
   >
-    <div class="py-2 max-h-80 overflow-y-auto" role="menu">
-      {countries.map((c) => (
-        <a
-          href={c.slug === 'uk' ? '/' : `/${c.slug}/`}
-          class={`flex items-center gap-3 px-4 py-2 text-sm hover:bg-tesla-bg ${c.code === current.code ? 'font-semibold' : ''}`}
-          role="menuitem"
-        >
-          <span aria-hidden="true">{c.flag}</span>
-          <span>{c.name}</span>
-        </a>
-      ))}
+    <div class="max-h-[28rem] overflow-y-auto p-3" role="menu">
+      {regions.map((r) => {
+        const list = grouped[r.key];
+        if (!list || list.length === 0) return null;
+        return (
+          <div class="mb-3 last:mb-0">
+            <h4 class="px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-tesla-grey">
+              {r.label}
+            </h4>
+            <ul>
+              {list.map((c) => (
+                <li class="py-0.5">
+                  {c.languages.length === 1 ? (
+                    <a
+                      href={getCountryHref(c)}
+                      rel={c.hasLandingPage ? undefined : 'nofollow'}
+                      class={`flex items-center gap-2 rounded px-2 py-1.5 text-sm hover:bg-tesla-bg ${c.code === current.code ? 'font-semibold' : ''}`}
+                      role="menuitem"
+                    >
+                      <span aria-hidden="true">{c.flag}</span>
+                      <span class="flex-1">{c.nativeName}</span>
+                    </a>
+                  ) : (
+                    <div class={`px-2 py-1.5 ${c.code === current.code ? 'font-semibold' : ''}`}>
+                      <div class="flex items-center gap-2 text-sm">
+                        <span aria-hidden="true">{c.flag}</span>
+                        <span>{c.nativeName}</span>
+                      </div>
+                      <div class="mt-1 flex flex-wrap gap-1 pl-6">
+                        {c.languages.map((lang) => (
+                          <a
+                            href={getLanguageHref(c, lang)}
+                            rel="nofollow"
+                            class="rounded border border-black/10 px-2 py-0.5 text-xs text-tesla-grey hover:border-tesla-black hover:text-tesla-black"
+                            role="menuitem"
+                          >
+                            {lang.label}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
     </div>
   </div>
 </div>
@@ -55,6 +99,13 @@ const { current } = Astro.props;
 
     document.addEventListener('click', (e) => {
       if (!root.contains(e.target as Node)) {
+        menu.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
         menu.classList.add('hidden');
         toggle.setAttribute('aria-expanded', 'false');
       }

@@ -34,7 +34,7 @@ const jsonLdArray = jsonLd
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
 
-    {countries.map((c) => (
+    {countries.filter((c) => c.hasLandingPage).map((c) => (
       <link
         rel="alternate"
         hreflang={c.locale}

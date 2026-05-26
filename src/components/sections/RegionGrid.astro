@@ -1,40 +1,62 @@
 ---
-import { countries } from '../../data/countries';
+import {
+  countriesByRegion,
+  getCountryHref,
+  getLanguageHref,
+  regions,
+} from '../../data/countries';
+import type { PageContent } from '../../data/content';
 
-const regions = [
-  { key: 'europe', label: 'Europe' },
-  { key: 'north-america', label: 'North America' },
-  { key: 'asia-pacific', label: 'Asia / Pacific' },
-  { key: 'middle-east', label: 'Middle East' },
-] as const;
+interface Props {
+  content: PageContent;
+}
+
+const { content } = Astro.props;
+const grouped = countriesByRegion();
 ---
 <section class="bg-tesla-bg">
   <div class="container-narrow py-16 sm:py-20">
     <h2 class="text-2xl sm:text-3xl font-medium text-center mb-2">
-      Other countries
+      {content.allCountriesTitle}
     </h2>
-    <p class="text-center text-tesla-grey mb-10">
-      The same referral works internationally. Pick your country to see local perks.
+    <p class="text-center text-tesla-grey mb-10 max-w-xl mx-auto">
+      {content.allCountriesIntro}
     </p>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {regions.map((r) => {
-        const inRegion = countries.filter((c) => c.region === r.key);
-        if (inRegion.length === 0) return null;
+        const list = grouped[r.key];
+        if (!list || list.length === 0) return null;
         return (
           <div>
             <h3 class="text-sm font-semibold uppercase tracking-wide text-tesla-grey mb-3">
               {r.label}
             </h3>
-            <ul class="space-y-2">
-              {inRegion.map((c) => (
+            <ul class="space-y-3">
+              {list.map((c) => (
                 <li>
                   <a
-                    href={c.slug === 'uk' ? '/' : `/${c.slug}/`}
-                    class="flex items-center gap-2 text-sm hover:text-tesla-grey"
+                    href={getCountryHref(c)}
+                    rel={c.hasLandingPage ? undefined : 'nofollow'}
+                    class="group flex items-center gap-2 text-sm hover:text-tesla-grey"
                   >
                     <span aria-hidden="true">{c.flag}</span>
-                    <span>{c.name}</span>
+                    <span class="font-medium text-tesla-black group-hover:text-tesla-grey">
+                      {c.nativeName}
+                    </span>
                   </a>
+                  {c.languages.length > 1 && (
+                    <div class="mt-1 ml-6 flex flex-wrap gap-x-3 gap-y-1">
+                      {c.languages.map((lang) => (
+                        <a
+                          href={getLanguageHref(c, lang)}
+                          rel="nofollow"
+                          class="text-xs text-tesla-grey hover:text-tesla-black"
+                        >
+                          {lang.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
@@ -42,8 +64,5 @@ const regions = [
         );
       })}
     </div>
-    <p class="text-center text-xs text-tesla-grey mt-10">
-      More countries coming soon.
-    </p>
   </div>
 </section>

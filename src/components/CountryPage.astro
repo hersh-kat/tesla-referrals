@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from './sections/Hero.astro';
+import TrustCounter from './sections/TrustCounter.astro';
+import ModelCards from './sections/ModelCards.astro';
+import HowItWorks from './sections/HowItWorks.astro';
+import WhyReferral from './sections/WhyReferral.astro';
+import Videos from './sections/Videos.astro';
+import Faq from './sections/Faq.astro';
+import RegionGrid from './sections/RegionGrid.astro';
+import { getReferralUrl, type Country } from '../data/countries';
+import type { PageContent } from '../data/content';
+
+interface Props {
+  country: Country;
+  content: PageContent;
+}
+
+const { country, content } = Astro.props;
+const referralUrl = getReferralUrl(country);
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Tesla Referral Code',
+  url: 'https://teslareferralcode.co/',
+};
+
+const offerJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Offer',
+  name: `Tesla Referral Benefit — ${country.name}`,
+  description: content.bothPerksSummary,
+  url: referralUrl,
+  seller: { '@type': 'Organization', name: 'Tesla' },
+  areaServed: { '@type': 'Country', name: country.name },
+  eligibleCustomerType: 'http://purl.org/goodrelations/v1#Consumer',
+};
+---
+<Layout
+  title={content.pageTitle}
+  description={content.pageDescription}
+  country={country}
+  jsonLd={[websiteJsonLd, offerJsonLd]}
+>
+  <Hero country={country} content={content} />
+  <TrustCounter country={country} content={content} />
+  <ModelCards country={country} content={content} />
+  <HowItWorks country={country} content={content} />
+  <WhyReferral content={content} />
+  <Videos content={content} />
+  <Faq country={country} content={content} />
+  <RegionGrid content={content} />
+</Layout>

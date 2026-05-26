@@ -1,4 +1,14 @@
 ---
+import type { PageContent } from '../../data/content';
+import type { Country } from '../../data/countries';
+
+interface Props {
+  country: Country;
+  content: PageContent;
+}
+
+const { country, content } = Astro.props;
+
 const launchDate = new Date('2026-05-23');
 const baseline = 12_400;
 const perDay = 27;
@@ -7,7 +17,7 @@ const daysSinceLaunch = Math.max(
   Math.floor((Date.now() - launchDate.getTime()) / 86_400_000),
 );
 const claimed = baseline + daysSinceLaunch * perDay;
-const formatted = new Intl.NumberFormat('en-GB').format(claimed);
+const formatted = new Intl.NumberFormat(country.locale).format(claimed);
 ---
 <section class="bg-tesla-bg">
   <div class="container-narrow py-8 text-center">
@@ -15,7 +25,7 @@ const formatted = new Intl.NumberFormat('en-GB').format(claimed);
       <span class="text-2xl sm:text-3xl font-semibold text-tesla-black tabular-nums align-middle">
         {formatted}+
       </span>
-      <span class="ml-2 align-middle">Tesla buyers have claimed referral benefits</span>
+      <span class="ml-2 align-middle">{content.trustCounterSuffix}</span>
     </p>
   </div>
 </section>

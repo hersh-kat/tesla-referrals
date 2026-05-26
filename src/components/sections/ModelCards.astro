@@ -5,83 +5,92 @@ import {
   getReferralUrl,
   type Country,
 } from '../../data/countries';
+import type { PageContent } from '../../data/content';
 import type { ModelKey } from '../../data/models';
 
 interface Props {
   country: Country;
+  content: PageContent;
 }
 
-const { country } = Astro.props;
-const { miles, cashOff, cashSymbol } = country.perks;
-
-const milesText = `${miles} Free Supercharging Miles`;
-const cashText = `${cashSymbol}${cashOff} Off`;
-const bothText = `${miles} Free Supercharging Miles or ${cashSymbol}${cashOff} Off`;
+const { country, content } = Astro.props;
 
 type CardConfig = {
   key: ModelKey | 'inventory';
   name: string;
-  subtitle: string;
+  subtitle: string | null;
   image: string;
-  imagePosition?: string;
   orderHref?: string;
   inventoryHref?: string;
   size: 'wide' | 'half';
 };
 
-const cards: CardConfig[] = [
-  {
-    key: 'my',
-    name: 'Model Y',
-    subtitle: milesText,
-    image: '/models/model_y_nv36.avif',
-    orderHref: getOrderUrl(country, 'my'),
-    inventoryHref: getInventoryUrl(country, 'my'),
-    size: 'wide',
-  },
-  {
-    key: 'm3',
-    name: 'Model 3',
-    subtitle: milesText,
-    image: '/models/modelnv35.avif',
-    orderHref: getOrderUrl(country, 'm3'),
-    inventoryHref: getInventoryUrl(country, 'm3'),
-    size: 'half',
-  },
-  {
-    key: 'mx',
-    name: 'Model X',
-    subtitle: cashText,
-    image: '/models/model_x.avif',
-    orderHref: getOrderUrl(country, 'mx'),
-    inventoryHref: getInventoryUrl(country, 'mx'),
-    size: 'half',
-  },
-  {
-    key: 'ms',
-    name: 'Model S',
-    subtitle: cashText,
-    image: '/models/model_s.avif',
-    orderHref: getOrderUrl(country, 'ms'),
-    inventoryHref: getInventoryUrl(country, 'ms'),
-    size: 'half',
-  },
+// Pull perk text per model from content. `null` = hide card entirely.
+// Empty string `''` = show card without a subtitle (e.g. AU Model Y).
+const perks = content.modelPerks;
+
+const rawCards: Array<CardConfig | null> = [
+  perks.my !== null
+    ? {
+        key: 'my',
+        name: 'Model Y',
+        subtitle: perks.my || null,
+        image: '/models/model_y_nv36.avif',
+        orderHref: getOrderUrl(country, 'my'),
+        inventoryHref: getInventoryUrl(country, 'my'),
+        size: 'wide',
+      }
+    : null,
+  perks.m3 !== null
+    ? {
+        key: 'm3',
+        name: 'Model 3',
+        subtitle: perks.m3 || null,
+        image: '/models/modelnv35.avif',
+        orderHref: getOrderUrl(country, 'm3'),
+        inventoryHref: getInventoryUrl(country, 'm3'),
+        size: 'half',
+      }
+    : null,
+  perks.mx !== null
+    ? {
+        key: 'mx',
+        name: 'Model X',
+        subtitle: perks.mx || null,
+        image: '/models/model_x.avif',
+        orderHref: getOrderUrl(country, 'mx'),
+        inventoryHref: getInventoryUrl(country, 'mx'),
+        size: 'half',
+      }
+    : null,
+  perks.ms !== null
+    ? {
+        key: 'ms',
+        name: 'Model S',
+        subtitle: perks.ms || null,
+        image: '/models/model_s.avif',
+        orderHref: getOrderUrl(country, 'ms'),
+        inventoryHref: getInventoryUrl(country, 'ms'),
+        size: 'half',
+      }
+    : null,
   {
     key: 'inventory',
-    name: 'Explore Inventory',
-    subtitle: bothText,
+    name: content.inventoryCardTitle,
+    subtitle: content.bothPerksSummary,
     image: '/models/inventory.avif',
     orderHref: getReferralUrl(country),
     size: 'half',
   },
 ];
 
+const cards = rawCards.filter((c): c is CardConfig => c !== null);
 const wide = cards.filter((c) => c.size === 'wide');
 const half = cards.filter((c) => c.size === 'half');
 ---
 <section id="models" class="bg-white">
   <div class="container-narrow py-12 sm:py-16">
-    <h2 class="sr-only">Qualifying Tesla models and referral benefits</h2>
+    <h2 class="sr-only">{content.modelsTitle}</h2>
 
     <div class="space-y-4 sm:space-y-6">
       {wide.map((c) => (
@@ -90,7 +99,7 @@ const half = cards.filter((c) => c.size === 'half');
           <div class="model-card-content">
             <header class="model-card-header">
               <h3>{c.name}</h3>
-              <p>{c.subtitle}</p>
+              {c.subtitle && <p>{c.subtitle}</p>}
             </header>
             <div class="model-card-buttons">
               {c.orderHref && (
@@ -100,7 +109,7 @@ const half = cards.filter((c) => c.size === 'half');
                   class="model-btn model-btn-primary"
                   data-cta={`${c.key}-order`}
                 >
-                  Order Now
+                  {content.ctaOrder}
                 </a>
               )}
               {c.inventoryHref && (
@@ -110,7 +119,7 @@ const half = cards.filter((c) => c.size === 'half');
                   class="model-btn model-btn-secondary"
                   data-cta={`${c.key}-inventory`}
                 >
-                  Explore Inventory
+                  {content.ctaInventory}
                 </a>
               )}
             </div>
@@ -125,7 +134,7 @@ const half = cards.filter((c) => c.size === 'half');
             <div class="model-card-content">
               <header class="model-card-header">
                 <h3>{c.name}</h3>
-                <p>{c.subtitle}</p>
+                {c.subtitle && <p>{c.subtitle}</p>}
               </header>
               <div class="model-card-buttons">
                 {c.orderHref && (
@@ -135,7 +144,7 @@ const half = cards.filter((c) => c.size === 'half');
                     class="model-btn model-btn-primary"
                     data-cta={`${c.key}-order`}
                   >
-                    Order Now
+                    {content.ctaOrder}
                   </a>
                 )}
                 {c.inventoryHref && (
@@ -145,7 +154,7 @@ const half = cards.filter((c) => c.size === 'half');
                     class="model-btn model-btn-secondary"
                     data-cta={`${c.key}-inventory`}
                   >
-                    Explore Inventory
+                    {content.ctaInventory}
                   </a>
                 )}
               </div>
