@@ -1,44 +1,21 @@
 ---
-import type { Country } from '../../data/countries';
+import type { PageContent } from '../../data/content';
 
 interface Props {
-  country: Country;
+  content: PageContent;
 }
 
-const { country } = Astro.props;
-const { miles, cashOff, cashSymbol } = country.perks;
+const { content } = Astro.props;
 ---
 <section class="bg-white">
   <div class="container-narrow py-16 sm:py-20 max-w-3xl">
     <h2 class="text-2xl sm:text-3xl font-medium mb-6">
-      Why use a Tesla referral code in the {country.name}?
+      {content.whyTitle}
     </h2>
     <div class="prose prose-tesla text-base text-tesla-black leading-relaxed space-y-4">
-      <p>
-        Tesla's referral programme is the only way to get an official discount on a
-        new Tesla. Tesla does not run public discount codes or sales. The referral
-        benefit is the single legitimate price reduction available to UK buyers,
-        and it's only unlocked when you order through an existing Tesla owner's
-        referral link.
-      </p>
-      <p>
-        For Model 3 and Model Y orders, the benefit is <strong>{miles} miles of free
-        Supercharging</strong>. That's enough free charging to cover roughly 1,500
-        miles of real-world driving, worth around {cashSymbol}120 at current
-        Supercharger pricing, and a useful credit for early road trips while you're
-        getting used to the car.
-      </p>
-      <p>
-        For Model S and Model X orders, the benefit is <strong>{cashSymbol}{cashOff}
-        off the purchase price</strong>, applied automatically at checkout. You'll
-        see it deducted in your Tesla account before you confirm the order.
-      </p>
-      <p>
-        Using a referral code costs you nothing. It doesn't change the price you
-        pay or the spec of the car. It just unlocks the benefit. The owner of the
-        referral code (in this case, an existing UK Tesla driver) receives a
-        matching reward from Tesla. That's how the programme is designed.
-      </p>
+      {content.whyBody.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
     </div>
   </div>
 </section>

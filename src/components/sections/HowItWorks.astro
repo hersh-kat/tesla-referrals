@@ -1,39 +1,22 @@
 ---
 import { getReferralUrl, type Country } from '../../data/countries';
+import type { PageContent } from '../../data/content';
 
 interface Props {
   country: Country;
+  content: PageContent;
 }
 
-const { country } = Astro.props;
-const { miles, cashOff, cashSymbol } = country.perks;
+const { country, content } = Astro.props;
 const referralUrl = getReferralUrl(country);
-
-const steps = [
-  {
-    n: '01',
-    title: 'Click the referral link',
-    body: 'Open the link below. It takes you straight to the Tesla website with the referral code pre-applied to your session.',
-  },
-  {
-    n: '02',
-    title: 'Configure your Tesla',
-    body: 'Choose your Model 3, Model Y, Model S or Model X, pick your colour, wheels and interior, and place your order.',
-  },
-  {
-    n: '03',
-    title: 'Receive the benefit',
-    body: `Take delivery and the referral benefit (${miles} free Supercharging miles or ${cashSymbol}${cashOff} off) is credited to your Tesla account automatically.`,
-  },
-];
 ---
 <section id="how" class="bg-tesla-bg">
   <div class="container-narrow py-16 sm:py-20">
     <h2 class="text-2xl sm:text-3xl font-medium text-center mb-12">
-      How to use the referral code
+      {content.howTitle}
     </h2>
     <ol class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {steps.map((s) => (
+      {content.steps.map((s) => (
         <li class="bg-white rounded-lg p-6">
           <div class="text-tesla-red font-mono text-sm">{s.n}</div>
           <h3 class="text-lg font-medium mt-2">{s.title}</h3>
@@ -43,7 +26,7 @@ const steps = [
     </ol>
     <div class="mt-10 text-center">
       <a href={referralUrl} rel="nofollow" class="btn-primary" data-cta="how-it-works">
-        Start your order
+        {content.ctaStartOrder}
       </a>
     </div>
   </div>

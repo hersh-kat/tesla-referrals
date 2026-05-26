@@ -3,6 +3,6 @@ import CountryPage from '../components/CountryPage.astro';
 import { countries } from '../data/countries';
 import { content } from '../data/content';
 
-const country = countries.find((c) => c.slug === 'uk')!;
+const country = countries.find((c) => c.slug === 'fr')!;
 ---
-<CountryPage country={country} content={content.uk} />
+<CountryPage country={country} content={content.fr} />
