@@ -43,6 +43,14 @@ const offerJsonLd = {
   country={country}
   jsonLd={[websiteJsonLd, offerJsonLd]}
 >
+  <script is:inline define:vars={{ countryCode: country.code, countryName: country.name }}>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.posthog?.capture('country_page_viewed', {
+        country_code: countryCode,
+        country_name: countryName,
+      });
+    });
+  </script>
   <Hero country={country} content={content} />
   <TrustCounter country={country} content={content} />
   <ModelCards country={country} content={content} />

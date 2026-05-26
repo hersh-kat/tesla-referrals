@@ -42,4 +42,16 @@ const description =
       </ul>
     </div>
   </section>
+  <script is:inline>
+    document.querySelectorAll('ul a[href^="/blog/"]').forEach((link) => {
+      link.addEventListener('click', () => {
+        const title = link.querySelector('h2')?.textContent?.trim();
+        const slug = link.getAttribute('href').replace('/blog/', '').replace('/', '');
+        window.posthog?.capture('blog_post_clicked', {
+          post_title: title,
+          post_slug: slug,
+        });
+      });
+    });
+  </script>
 </Layout>
