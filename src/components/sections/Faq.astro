@@ -43,6 +43,28 @@ const faqs = content.faqs;
   </div>
 </section>
 
+<script is:inline define:vars={{ countryCode: country.code, countryName: country.name }}>
+  document.querySelector('[data-cta="faq"]')?.addEventListener('click', () => {
+    window.posthog?.capture('faq_cta_clicked', {
+      country_code: countryCode,
+      country_name: countryName,
+    });
+  });
+
+  document.querySelectorAll('#faq details').forEach((details) => {
+    details.addEventListener('toggle', () => {
+      if (details.open) {
+        const question = details.querySelector('h3')?.textContent?.trim();
+        window.posthog?.capture('faq_item_expanded', {
+          question,
+          country_code: countryCode,
+          country_name: countryName,
+        });
+      }
+    });
+  });
+</script>
+
 <script
   type="application/ld+json"
   set:html={JSON.stringify({

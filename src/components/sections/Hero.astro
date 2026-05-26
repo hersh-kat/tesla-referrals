@@ -35,3 +35,13 @@ const referralUrl = getReferralUrl(country);
     </div>
   </div>
 </section>
+
+<script is:inline define:vars={{ countryCode: country.code, countryName: country.name }}>
+  document.querySelector('[data-cta="hero-primary"]')?.addEventListener('click', () => {
+    window.posthog?.capture('referral_link_clicked', {
+      cta_location: 'hero',
+      country_code: countryCode,
+      country_name: countryName,
+    });
+  });
+</script>

@@ -110,5 +110,16 @@ const grouped = countriesByRegion();
         toggle.setAttribute('aria-expanded', 'false');
       }
     });
+
+    menu.querySelectorAll('a[role="menuitem"]').forEach((link) => {
+      link.addEventListener('click', () => {
+        const countryName = link.querySelector('span:not([aria-hidden])')?.textContent?.trim() ||
+          link.querySelector('span.flex-1')?.textContent?.trim();
+        window.posthog?.capture('country_selected', {
+          country_name: countryName,
+          destination_href: link.getAttribute('href'),
+        });
+      });
+    });
   });
 </script>

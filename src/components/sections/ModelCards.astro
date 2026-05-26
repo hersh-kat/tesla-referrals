@@ -166,6 +166,30 @@ const half = cards.filter((c) => c.size === 'half');
   </div>
 </section>
 
+<script is:inline define:vars={{ countryCode: country.code, countryName: country.name }}>
+  document.querySelectorAll('[data-cta$="-order"]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const model = el.getAttribute('data-cta').replace('-order', '');
+      window.posthog?.capture('model_order_clicked', {
+        model,
+        country_code: countryCode,
+        country_name: countryName,
+      });
+    });
+  });
+
+  document.querySelectorAll('[data-cta$="-inventory"]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const model = el.getAttribute('data-cta').replace('-inventory', '');
+      window.posthog?.capture('model_inventory_clicked', {
+        model,
+        country_code: countryCode,
+        country_name: countryName,
+      });
+    });
+  });
+</script>
+
 <style>
   .model-card {
     position: relative;
