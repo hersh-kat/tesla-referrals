@@ -19,11 +19,32 @@ type CardConfig = {
   key: ModelKey | 'inventory';
   name: string;
   subtitle: string | null;
+  // Base path of the image without size suffix or extension,
+  // e.g. '/models/model_s'. Sized variants are generated at build-prep time
+  // (see the *-480/-800/-640/-1280.avif files) and picked via srcset.
   image: string;
   orderHref?: string;
   inventoryHref?: string;
   size: 'wide' | 'half';
 };
+
+// Build a responsive <img>'s src/srcset/sizes for a card image. The card
+// itself controls the rendered aspect ratio via CSS `object-fit: cover`, so we
+// only need the browser to download a file that matches its display width.
+// Half cards render at ~45vw on desktop and full width on mobile; the wide
+// hero card spans the full container.
+function responsiveImg(base: string, size: 'wide' | 'half') {
+  const widths = size === 'wide' ? [640, 1280] : [480, 800];
+  const largest = widths[widths.length - 1];
+  return {
+    src: `${base}-${largest}.avif`,
+    srcset: widths.map((w) => `${base}-${w}.avif ${w}w`).join(', '),
+    sizes: size === 'wide' ? '100vw' : '(min-width: 768px) 45vw, 100vw',
+    width: largest,
+    // Wide source is 1280×659; the half-card sources are square.
+    height: size === 'wide' ? Math.round((largest * 659) / 1280) : largest,
+  };
+}
 
 // Pull perk text per model from content. `null` = hide card entirely.
 // Empty string `''` = show card without a subtitle (e.g. AU Model Y).
@@ -35,7 +56,7 @@ const rawCards: Array<CardConfig | null> = [
         key: 'my',
         name: 'Model Y',
         subtitle: perks.my || null,
-        image: '/models/model_y_nv36.avif',
+        image: '/models/model_y_nv36',
         orderHref: getOrderUrl(country, 'my'),
         inventoryHref: getInventoryUrl(country, 'my'),
         size: 'wide',
@@ -46,7 +67,7 @@ const rawCards: Array<CardConfig | null> = [
         key: 'm3',
         name: 'Model 3',
         subtitle: perks.m3 || null,
-        image: '/models/modelnv35.avif',
+        image: '/models/modelnv35',
         orderHref: getOrderUrl(country, 'm3'),
         inventoryHref: getInventoryUrl(country, 'm3'),
         size: 'half',
@@ -57,7 +78,7 @@ const rawCards: Array<CardConfig | null> = [
         key: 'mx',
         name: 'Model X',
         subtitle: perks.mx || null,
-        image: '/models/model_x.avif',
+        image: '/models/model_x',
         orderHref: getOrderUrl(country, 'mx'),
         inventoryHref: getInventoryUrl(country, 'mx'),
         size: 'half',
@@ -68,7 +89,7 @@ const rawCards: Array<CardConfig | null> = [
         key: 'ms',
         name: 'Model S',
         subtitle: perks.ms || null,
-        image: '/models/model_s.avif',
+        image: '/models/model_s',
         orderHref: getOrderUrl(country, 'ms'),
         inventoryHref: getInventoryUrl(country, 'ms'),
         size: 'half',
@@ -78,7 +99,7 @@ const rawCards: Array<CardConfig | null> = [
     key: 'inventory',
     name: content.inventoryCardTitle,
     subtitle: content.bothPerksSummary,
-    image: '/models/inventory.avif',
+    image: '/models/inventory',
     orderHref: getReferralUrl(country),
     size: 'half',
   },
@@ -95,7 +116,19 @@ const half = cards.filter((c) => c.size === 'half');
     <div class="space-y-4 sm:space-y-6">
       {wide.map((c) => (
         <div class="model-card aspect-[21/9] sm:aspect-[24/9]" data-card={c.key}>
-          <img src={c.image} alt={`Tesla ${c.name}`} loading="eager" decoding="async" />
+          {(() => { const ri = responsiveImg(c.image, 'wide'); return (
+          <img
+            src={ri.src}
+            srcset={ri.srcset}
+            sizes={ri.sizes}
+            width={ri.width}
+            height={ri.height}
+            alt={`Tesla ${c.name}`}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+          ); })()}
           <div class="model-card-content">
             <header class="model-card-header">
               <h3>{c.name}</h3>
@@ -130,7 +163,18 @@ const half = cards.filter((c) => c.size === 'half');
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {half.map((c) => (
           <div class="model-card aspect-[4/3] sm:aspect-[16/10]" data-card={c.key}>
-            <img src={c.image} alt={`Tesla ${c.name}`} loading="lazy" decoding="async" />
+            {(() => { const ri = responsiveImg(c.image, 'half'); return (
+            <img
+              src={ri.src}
+              srcset={ri.srcset}
+              sizes={ri.sizes}
+              width={ri.width}
+              height={ri.height}
+              alt={`Tesla ${c.name}`}
+              loading="lazy"
+              decoding="async"
+            />
+            ); })()}
             <div class="model-card-content">
               <header class="model-card-header">
                 <h3>{c.name}</h3>

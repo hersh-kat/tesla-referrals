@@ -15,7 +15,7 @@ export const models: TeslaModel[] = [
     perkType: 'miles',
     tagline:
       'The all-electric mid-size SUV. Class-leading range and the most popular Tesla in the UK.',
-    image: '/models/model_y_nv36.avif',
+    image: '/models/model_y_nv36-1280.avif',
   },
   {
     key: 'm3',
@@ -23,7 +23,7 @@ export const models: TeslaModel[] = [
     perkType: 'miles',
     tagline:
       'The refreshed Model 3 with more range, a quieter cabin and a sharper interior.',
-    image: '/models/modelnv35.avif',
+    image: '/models/modelnv35-800.avif',
   },
   {
     key: 'ms',
@@ -31,7 +31,7 @@ export const models: TeslaModel[] = [
     perkType: 'cash',
     tagline:
       'The flagship saloon. Plaid performance, 400+ mile range and ludicrous tech.',
-    image: '/models/model_s.avif',
+    image: '/models/model_s-800.avif',
   },
   {
     key: 'mx',
@@ -39,6 +39,6 @@ export const models: TeslaModel[] = [
     perkType: 'cash',
     tagline:
       'The premium SUV with falcon-wing doors and seating for up to seven.',
-    image: '/models/model_x.avif',
+    image: '/models/model_x-800.avif',
   },
 ];

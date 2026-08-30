@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { countries } from '../data/countries';
+
+const country = countries.find((c) => c.slug === 'uk')!;
+
+const title = 'Privacy Policy | Tesla Referral Code';
+const description =
+  'How teslareferralcode.co handles your data: the analytics we use, cookies, and how outbound Tesla referral links work. No personal data is sold.';
+
+const updated = 'August 2026';
+---
+<Layout
+  title={title}
+  description={description}
+  country={country}
+  canonical="https://teslareferralcode.co/privacy/"
+>
+  <section class="bg-white">
+    <div class="container-narrow py-16 sm:py-20 max-w-3xl">
+      <p class="text-xs uppercase tracking-widest text-tesla-grey mb-4">
+        Privacy
+      </p>
+      <h1 class="text-3xl sm:text-5xl font-medium leading-tight">
+        Privacy Policy
+      </h1>
+      <p class="mt-4 text-sm text-tesla-grey">Last updated: {updated}</p>
+
+      <div class="mt-10 space-y-6 text-base leading-relaxed">
+        <p>
+          This is a small, independent website that shares a Tesla referral
+          code and explains how Tesla's referral programme works. This page
+          describes what data the site collects and how it is used. In short:
+          we don't ask you for personal information, and we don't sell any
+          data.
+        </p>
+
+        <h2 class="text-xl font-medium pt-6">Who runs this site</h2>
+        <p>
+          teslareferralcode.co is run by an individual Tesla owner, not by
+          Tesla. The site is not affiliated with, endorsed by, or operated by
+          Tesla, Inc. See the disclaimer in the footer for details.
+        </p>
+
+        <h2 class="text-xl font-medium pt-6">Information we collect</h2>
+        <p>
+          We do not have accounts, sign-ups, or forms, so we never collect
+          your name, email address, or payment details. We use privacy-focused
+          product analytics (PostHog) to understand aggregate, anonymised usage
+          — for example how many people visit a page or click a referral link.
+          This helps us keep the information on the site accurate and useful.
+        </p>
+        <p>
+          Analytics data may include your approximate location (derived from
+          your IP address), device and browser type, the pages you view, and
+          the links you click. We do not use this data to identify you
+          personally.
+        </p>
+
+        <h2 class="text-xl font-medium pt-6">Cookies and local storage</h2>
+        <p>
+          The analytics tool may set cookies or use your browser's local
+          storage to measure whether a visit is new or returning. These are
+          used only for aggregate measurement. You can block or delete cookies
+          in your browser settings at any time without affecting your ability
+          to use the site.
+        </p>
+
+        <h2 class="text-xl font-medium pt-6">Outbound referral links</h2>
+        <p>
+          When you click a referral or order link on this site, you are taken
+          to tesla.com with a referral code attached to your session. From that
+          point, Tesla's own
+          <a
+            href="https://www.tesla.com/legal/privacy"
+            class="underline hover:text-tesla-red"
+            rel="nofollow noopener"
+            target="_blank">privacy policy</a>
+          applies. If you complete an order, the site owner may receive Tesla
+          referral benefits at no additional cost to you. We are not told your
+          identity or the details of your purchase.
+        </p>
+
+        <h2 class="text-xl font-medium pt-6">Data sharing</h2>
+        <p>
+          We do not sell, rent, or trade your data. Anonymised analytics data
+          is processed by our analytics provider solely to give us aggregate
+          usage statistics.
+        </p>
+
+        <h2 class="text-xl font-medium pt-6">Your choices</h2>
+        <p>
+          You can use browser privacy settings, tracking-protection features,
+          or an ad/tracker blocker to opt out of analytics. The site works the
+          same either way.
+        </p>
+
+        <h2 class="text-xl font-medium pt-6">Contact</h2>
+        <p>
+          If you have a question about this policy, you can reach out via the
+          <a href="/about/" class="underline hover:text-tesla-red">about page</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

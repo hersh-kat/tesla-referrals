@@ -88,7 +88,7 @@ export type PageContent = {
 const uk: PageContent = {
   pageTitle: 'Tesla Referral Code UK 2026 — 650 Free Miles or £500 Off',
   pageDescription:
-    'Use this verified Tesla referral code (hersh671564) when ordering a new Tesla in the UK to claim 650 free Supercharging miles on Model 3 / Model Y or £500 off Model S / Model X.',
+    'Use verified Tesla referral code hersh671564 in the UK for 650 free Supercharging miles on Model 3/Y or £500 off Model S/X. Applied automatically.',
 
   heroEyebrow: 'Tesla Referral Code · United Kingdom',
   heroHeadlineMain: '650 free Supercharging miles',
@@ -196,7 +196,7 @@ const uk: PageContent = {
 const us: PageContent = {
   pageTitle: 'Tesla Referral Code 2026 — 3 Months Free Full Self-Driving',
   pageDescription:
-    'Use this verified Tesla referral code (hersh671564) when ordering a new Tesla in the US to claim 3 months of free Full Self-Driving (Supervised). Works on Model 3, Model Y, Model S, Model X and Cybertruck.',
+    'Use verified Tesla referral code hersh671564 in the US for 3 months of free Full Self-Driving (Supervised) on any new Tesla, including Cybertruck.',
 
   heroEyebrow: 'Tesla Referral Code · United States',
   heroHeadlineMain: '3 months of free Full Self-Driving',
@@ -304,7 +304,7 @@ const us: PageContent = {
 const ca: PageContent = {
   pageTitle: 'Tesla Referral Code Canada 2026 — 3 Months Free Full Self-Driving',
   pageDescription:
-    'Use this verified Tesla referral code (hersh671564) when ordering a new Tesla in Canada to claim 3 months of free Full Self-Driving (Supervised). Works on Model 3, Model Y, Model S, Model X and Cybertruck.',
+    'Use verified Tesla referral code hersh671564 in Canada for 3 months of free Full Self-Driving (Supervised) on any new Tesla, incl. Cybertruck.',
 
   heroEyebrow: 'Tesla Referral Code · Canada',
   heroHeadlineMain: '3 months of free Full Self-Driving',
@@ -410,9 +410,9 @@ const ca: PageContent = {
 // =============================================================================
 
 const de: PageContent = {
-  pageTitle: 'Tesla Empfehlungscode 2026 — 1.000 km gratis Supercharging oder 500 € Rabatt',
+  pageTitle: 'Tesla Empfehlungscode 2026 — 1.000 km gratis Supercharging',
   pageDescription:
-    'Nutze diesen verifizierten Tesla Empfehlungscode (hersh671564) bei der Bestellung eines neuen Tesla in Deutschland und erhalte 1.000 km kostenloses Supercharging auf Model 3 / Model Y oder 500 € Rabatt auf Model S / Model X.',
+    'Nutze den verifizierten Tesla Empfehlungscode hersh671564 in Deutschland: 1.000 km gratis Supercharging auf Model 3/Y oder 500 € Rabatt auf Model S/X.',
 
   heroEyebrow: 'Tesla Empfehlungscode · Deutschland',
   heroHeadlineMain: '1.000 km kostenloses Supercharging',
@@ -518,9 +518,9 @@ const de: PageContent = {
 // =============================================================================
 
 const nl: PageContent = {
-  pageTitle: 'Tesla Referral Code Nederland 2026 — 1.000 km gratis Supercharging of € 500 korting',
+  pageTitle: 'Tesla Referral Code Nederland 2026 — 1.000 km gratis Supercharging',
   pageDescription:
-    'Gebruik deze geverifieerde Tesla referral code (hersh671564) bij het bestellen van een nieuwe Tesla in Nederland. Je krijgt 1.000 km gratis Supercharging op Model 3 / Model Y of € 500 korting op Model S / Model X.',
+    'Gebruik de geverifieerde Tesla referral code hersh671564 in Nederland: 1.000 km gratis Supercharging op Model 3/Y of € 500 korting op Model S/X.',
 
   heroEyebrow: 'Tesla Referral Code · Nederland',
   heroHeadlineMain: '1.000 km gratis Supercharging',
@@ -626,9 +626,9 @@ const nl: PageContent = {
 // =============================================================================
 
 const fr: PageContent = {
-  pageTitle: 'Code de parrainage Tesla France 2026 — 1 000 km de Supercharge gratuit ou 500 € de réduction',
+  pageTitle: 'Code de parrainage Tesla France 2026 — 1 000 km Supercharge gratuit',
   pageDescription:
-    'Utilisez ce code de parrainage Tesla vérifié (hersh671564) pour commander une nouvelle Tesla en France. Vous obtenez 1 000 km de Supercharge gratuite sur Model 3 / Model Y ou 500 € de réduction sur Model S / Model X.',
+    'Utilisez le code de parrainage Tesla vérifié hersh671564 en France : 1 000 km de Supercharge gratuit sur Model 3/Y ou 500 € sur Model S/X.',
 
   heroEyebrow: 'Code de parrainage Tesla · France',
   heroHeadlineMain: '1 000 km de Supercharge gratuite',
@@ -734,9 +734,9 @@ const fr: PageContent = {
 // =============================================================================
 
 const no: PageContent = {
-  pageTitle: 'Tesla referral-kode Norge 2026 — 1 000 km gratis Supercharging eller 5 000 kr i avslag',
+  pageTitle: 'Tesla referral-kode Norge 2026 — 1 000 km gratis Supercharging',
   pageDescription:
-    'Bruk denne verifiserte Tesla referral-koden (hersh671564) når du bestiller en ny Tesla i Norge. Du får 1 000 km gratis Supercharging på Model 3 / Model Y eller 5 000 kr i avslag på Model S / Model X.',
+    'Bruk den verifiserte Tesla referral-koden hersh671564 i Norge: 1 000 km gratis Supercharging på Model 3/Y eller 5 000 kr avslag på S/X.',
 
   heroEyebrow: 'Tesla referral-kode · Norge',
   heroHeadlineMain: '1 000 km gratis Supercharging',
@@ -844,7 +844,7 @@ const no: PageContent = {
 const au: PageContent = {
   pageTitle: 'Tesla Referral Code Australia 2026 — A$350 Off a New Tesla',
   pageDescription:
-    'Use this verified Tesla referral code (hersh671564) when ordering a new Tesla in Australia to claim up to A$350 off your new Model 3 or Model Y. Order through this link and the discount is applied automatically.',
+    'Use verified Tesla referral code hersh671564 in Australia to get up to A$350 off a new Model 3 or Model Y. Discount applied automatically at checkout.',
 
   heroEyebrow: 'Tesla Referral Code · Australia',
   heroHeadlineMain: 'Up to A$350 off',
